@@ -86,4 +86,4 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: Package
-        path: CodeSwine-Solo_Public_Lobby/bin/Release
+        path: GTA5Online-Private_Public_Lobby\CodeSwine-Solo_Public_Lobby/bin/Release
