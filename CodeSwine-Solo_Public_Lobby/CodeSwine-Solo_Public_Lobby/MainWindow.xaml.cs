@@ -21,6 +21,7 @@ namespace CodeSwine_Solo_Public_Lobby
 
         private bool set = false;
         private bool active = false;
+        private bool interface_active = true;
 
         public MainWindow()
         {
@@ -139,6 +140,28 @@ namespace CodeSwine_Solo_Public_Lobby
             lblLock.Content = "Rules active." + Environment.NewLine + "Click to deactivate!";
         }
 
+        private void ToggleInterface()
+        {
+            string interfaceName = txbInterface.Text;
+            if (interface_active)
+            {
+                System.Diagnostics.ProcessStartInfo psi = new System.Diagnostics.ProcessStartInfo("netsh", "interface set interface name=" + interfaceName + " admin=DISABLE");
+                System.Diagnostics.Process p = new System.Diagnostics.Process();
+
+                p.StartInfo = psi;
+                p.Start();
+                interface_active = false;
+            }
+            else
+            {
+                System.Diagnostics.ProcessStartInfo psi = new System.Diagnostics.ProcessStartInfo("netsh", "interface set interface name=" + interfaceName + " admin=ENABLE");
+                System.Diagnostics.Process p = new System.Diagnostics.Process();
+                p.StartInfo = psi;
+                p.Start();
+                interface_active = true;
+            }
+        }
+
         [DllImport("User32.dll")]
         private static extern bool RegisterHotKey(
         [In] IntPtr hWnd,
@@ -180,12 +203,16 @@ namespace CodeSwine_Solo_Public_Lobby
             if (!RegisterHotKey(helper.Handle, HOTKEY_ID, MOD_CTRL, VK_F10))
             {
             }
+            if (!RegisterHotKey(helper.Handle, 9001, MOD_CTRL, 0x7A))
+            {
+            }
         }
 
         private void UnregisterHotKey()
         {
             var helper = new WindowInteropHelper(this);
             UnregisterHotKey(helper.Handle, HOTKEY_ID);
+            UnregisterHotKey(helper.Handle, 9001);
         }
 
         private IntPtr HwndHook(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
@@ -198,6 +225,10 @@ namespace CodeSwine_Solo_Public_Lobby
                     {
                         case HOTKEY_ID:
                             OnHotKeyPressed();
+                            handled = true;
+                            break;
+                        case 9001:
+                            ToggleInterface();
                             handled = true;
                             break;
                     }
