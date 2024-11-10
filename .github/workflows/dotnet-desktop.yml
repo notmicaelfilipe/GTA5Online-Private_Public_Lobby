@@ -46,6 +46,7 @@ jobs:
         path: CodeSwine-Solo_Public_Lobby/CodeSwine-Solo_Public_Lobby/bin/${{ matrix.configuration }}
 
     - name: Zip files
+      if: startsWith(github.ref, 'refs/tags/')
       run: |
         cd CodeSwine-Solo_Public_Lobby/CodeSwine-Solo_Public_Lobby/bin/
         tar.exe -a -c -f CodeSwine-Solo_Public_Lobby.zip ${{ matrix.configuration }}
@@ -54,5 +55,5 @@ jobs:
       if: startsWith(github.ref, 'refs/tags/')
       uses: softprops/action-gh-release@v2
       with:
-        files: CodeSwine-Solo_Public_Lobby.zip
+        files: CodeSwine-Solo_Public_Lobby/CodeSwine-Solo_Public_Lobby/bin/${{ matrix.configuration }}/*
     
