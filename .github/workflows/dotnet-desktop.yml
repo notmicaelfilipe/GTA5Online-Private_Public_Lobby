@@ -87,8 +87,15 @@ jobs:
         name: CodeSwine-Solo_Public_Lobby-${{ matrix.configuration }}
         path: CodeSwine-Solo_Public_Lobby/CodeSwine-Solo_Public_Lobby/bin/${{ matrix.configuration }}
 
+    - uses: actions/download-artifact@v4
+      with:
+        name: CodeSwine-Solo_Public_Lobby
+        
+    - name: Display structure of downloaded files
+      run: dir
+
     - name: Release
       uses: softprops/action-gh-release@v2
       if: startsWith(github.ref, 'refs/tags/')
       with:
-        files: CodeSwine-Solo_Public_Lobby/CodeSwine-Solo_Public_Lobby/bin/*
+        files: CodeSwine-Solo_Public_Lobby/CodeSwine-Solo_Public_Lobby/CodeSwine-Solo_Public_Lobby.zip
