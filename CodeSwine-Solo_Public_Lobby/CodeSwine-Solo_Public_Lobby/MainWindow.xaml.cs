@@ -160,6 +160,7 @@ namespace CodeSwine_Solo_Public_Lobby
                 p.Start();
                 interface_active = true;
             }
+            System.Media.SystemSounds.Hand.Play();
         }
 
         [DllImport("User32.dll")]
