@@ -84,7 +84,7 @@ jobs:
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: CodeSwine-Solo_Public_Lobby-${{ matrix.configuration }}
+        name: CodeSwine-Solo_Public_Lobby
         path: CodeSwine-Solo_Public_Lobby/CodeSwine-Solo_Public_Lobby/bin/${{ matrix.configuration }}
 
     - uses: actions/download-artifact@v4
