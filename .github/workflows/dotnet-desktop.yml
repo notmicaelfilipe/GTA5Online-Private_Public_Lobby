@@ -75,18 +75,18 @@ jobs:
       run: msbuild $env:Solution_Name /t:Build /p:Configuration=$env:Configuration /p:OutputPath=bin\${{ matrix.configuration }}
       env:
         Configuration: ${{ matrix.configuration }}
-        
-    - name: Upload build artifacts
-      uses: actions/upload-artifact@v4
-      with:
-        name: CodeSwine-Solo_Public_Lobby
-        path: CodeSwine-Solo_Public_Lobby/CodeSwine-Solo_Public_Lobby/bin/${{ matrix.configuration }}
 
     - name: Zip files
       #if: startsWith(github.ref, 'refs/tags/')
       run: |
         cd CodeSwine-Solo_Public_Lobby/CodeSwine-Solo_Public_Lobby/bin/${{ matrix.configuration }}
-        tar.exe -a -c -f --exclude=CodeSwine-Solo_Public_Lobby.zip CodeSwine-Solo_Public_Lobby.zip *
+        tar.exe -a -c -f CodeSwine-Solo_Public_Lobby.zip *
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: CodeSwine-Solo_Public_Lobby
+        path: CodeSwine-Solo_Public_Lobby/CodeSwine-Solo_Public_Lobby/bin/${{ matrix.configuration }}
 
     - name: release
       if: startsWith(github.ref, 'refs/tags/')
