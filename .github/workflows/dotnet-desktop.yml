@@ -77,7 +77,7 @@ jobs:
 
     # Restore the application to populate the obj folder with RuntimeIdentifiers
     - name: Restore the application
-      run: msbuild $env:Solution_Name /t:Restore /p:Configuration=$env:Configuration
+      run: msbuild $env:Solution_Name /t:Restore /p:OutDir=CodeSwine-Solo_Public_Lobby/bin/${{ matrix.configuration }};Configuration=$env:Configuration
       env:
         Configuration: ${{ matrix.configuration }}
 
@@ -90,4 +90,4 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: Package
-        path: GTA5Online-Private_Public_Lobby\CodeSwine-Solo_Public_Lobby/bin/${{ matrix.configuration }}
+        path: CodeSwine-Solo_Public_Lobby/bin/${{ matrix.configuration }}
