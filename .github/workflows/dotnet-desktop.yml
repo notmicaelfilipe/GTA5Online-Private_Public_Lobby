@@ -81,9 +81,13 @@ jobs:
       env:
         Configuration: ${{ matrix.configuration }}
 
+    - name: list dir
+      run: dir
+        
+
     # Upload the MSIX package: https://github.com/marketplace/actions/upload-a-build-artifact
     - name: Upload build artifacts
       uses: actions/upload-artifact@v3
       with:
         name: Package
-        path: GTA5Online-Private_Public_Lobby\CodeSwine-Solo_Public_Lobby/bin/Release
+        path: GTA5Online-Private_Public_Lobby\CodeSwine-Solo_Public_Lobby/bin/${{ matrix.configuration }}
