@@ -55,5 +55,5 @@ jobs:
       if: startsWith(github.ref, 'refs/tags/')
       uses: softprops/action-gh-release@v2
       with:
-        files: CodeSwine-Solo_Public_Lobby/CodeSwine-Solo_Public_Lobby/bin/${{ matrix.configuration }}/*
+        files: CodeSwine-Solo_Public_Lobby/CodeSwine-Solo_Public_Lobby/bin/CodeSwine-Solo_Public_Lobby.zip
     
