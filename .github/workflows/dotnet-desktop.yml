@@ -74,18 +74,15 @@ jobs:
     - name: Setup MSBuild.exe
       uses: microsoft/setup-msbuild@v2
 
-    - name: debug
-      run: msbuild -h
-
 
     # Restore the application to populate the obj folder with RuntimeIdentifiers
-    - name: Restore the application
-      run: msbuild $env:Solution_Name /t:Restore /p:Configuration=$env:Configuration /p:OutDir=bin\${{ matrix.configuration }}
+    - name: Build the application
+      run: msbuild $env:Solution_Name /t:Build /p:Configuration=$env:Configuration /p:OutputPath=bin\${{ matrix.configuration }}
       env:
         Configuration: ${{ matrix.configuration }}
 
     - name: list dir
-      run: dir CodeSwine-Solo_Public_Lobby
+      run: dir CodeSwine-Solo_Public_Lobby/CodeSwine-Solo_Public_Lobby
         
 
     # Upload the MSIX package: https://github.com/marketplace/actions/upload-a-build-artifact
@@ -93,4 +90,4 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: Package
-        path: CodeSwine-Solo_Public_Lobby/bin/${{ matrix.configuration }}
+        path: CodeSwine-Solo_Public_Lobby/CodeSwine-Solo_Public_Lobby/bin/${{ matrix.configuration }}
