@@ -82,7 +82,7 @@ jobs:
         Configuration: ${{ matrix.configuration }}
 
     - name: list dir
-      run: dir CodeSwine-Solo_Public_Lobby
+      run: dir CodeSwine-Solo_Public_Lobby/CodeSwine-Solo_Public_Lobby
         
 
     # Upload the MSIX package: https://github.com/marketplace/actions/upload-a-build-artifact
