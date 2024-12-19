@@ -150,6 +150,7 @@ namespace CodeSwine_Solo_Public_Lobby
 
                 p.StartInfo = psi;
                 p.Start();
+                btnToggleInt.Background = ColorBrush.Red;
                 interface_active = false;
             }
             else
@@ -158,6 +159,7 @@ namespace CodeSwine_Solo_Public_Lobby
                 System.Diagnostics.Process p = new System.Diagnostics.Process();
                 p.StartInfo = psi;
                 p.Start();
+                btnToggleInt.Background = ColorBrush.Green;
                 interface_active = true;
             }
             System.Media.SystemSounds.Hand.Play();
@@ -244,6 +246,12 @@ namespace CodeSwine_Solo_Public_Lobby
         {
             SetRules();
             System.Media.SystemSounds.Hand.Play();
+        }
+
+        private void btnToggleInt_Click(object sender, RoutedEventArgs e)
+        {
+            ToggleInterface();
+
         }
     }
 }
